@@ -128,9 +128,9 @@ dependencies {
     implementation("org.tensorflow:tensorflow-lite-gpu:2.14.0")
 
     // CameraX
-    implementation("androidx.camera:camera-camera2:1.3.1")
-    implementation("androidx.camera:camera-lifecycle:1.3.1")
-    implementation("androidx.camera:camera-view:1.3.1")
+    implementation("androidx.camera:camera-camera2:1.5.2")
+    implementation("androidx.camera:camera-lifecycle:1.5.2")
+    implementation("androidx.camera:camera-view:1.5.2")
 
     // WorkManager
     implementation("androidx.work:work-runtime-ktx:2.9.0")
