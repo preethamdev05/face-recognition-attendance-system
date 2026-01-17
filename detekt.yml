@@ -1,0 +1,67 @@
+build:
+  maxIssues: 0
+  excludeCorrectable: false
+
+config:
+  validation: true
+  warningsAsErrors: true
+
+processors:
+  active: true
+
+outputReports:
+  active: true
+  exclude:
+    - 'TxtOutputReport'
+
+complexity:
+  active: true
+  ComplexCondition:
+    active: true
+    threshold: 3
+  LongMethod:
+    active: true
+    threshold: 20
+  LongParameterList:
+    active: true
+    threshold: 5
+  TooManyFunctions:
+    active: true
+    thresholdInClasses: 15
+    thresholdInInterfaces: 15
+    thresholdInObjects: 15
+
+naming:
+  active: true
+  FunctionNaming:
+    active: true
+    functionPattern: '^[a-z][A-Za-z0-9]*$'
+  VariableNaming:
+    active: true
+    variablePattern: '^[a-z][A-Za-z0-9]*$'
+  ObjectPropertyNaming:
+    active: true
+    constantPattern: '^[A-Z][_A-Z0-9]*$'
+
+potential-bugs:
+  active: true
+  UnsafeCast:
+    active: true
+  LateinitUsage:
+    active: true
+    excludeAnnotatedProperties: ['Inject']
+    ignoreOnClassesPattern: '.*Fragment|.*Activity|.*ViewModel'
+
+style:
+  active: true
+  MagicNumber:
+    active: true
+    ignoreNumbers: ['-1', '0', '1', '2']
+  MaxLineLength:
+    active: true
+    maxLineLength: 120
+
+performance:
+  active: true
+  ForEachOnRange:
+    active: true

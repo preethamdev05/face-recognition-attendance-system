@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# Pre-commit hook for code quality checks
+
+echo "Running code quality checks..."
+
+# Run Ktlint check
+echo "Checking code formatting with Ktlint..."
+./gradlew ktlintCheck
+KTLINT_EXIT_CODE=$?
+
+if [ $KTLINT_EXIT_CODE -ne 0 ]; then
+    echo "❌ Ktlint check failed. Run './gradlew ktlintFormat' to fix."
+    exit 1
+fi
+
+# Run Detekt
+echo "Running static analysis with Detekt..."
+./gradlew detekt
+DETEKT_EXIT_CODE=$?
+
+if [ $DETEKT_EXIT_CODE -ne 0 ]; then
+    echo "❌ Detekt check failed. Fix the issues and try again."
+    exit 1
+fi
+
+echo "✅ All code quality checks passed!"
+exit 0
