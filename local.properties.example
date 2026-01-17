@@ -1,0 +1,9 @@
+## This file must be in your .gitignore.
+## Copy this to local.properties and fill in your values.
+
+# Android SDK location
+sdk.dir=/path/to/Android/sdk
+
+# Firebase configuration
+firebase.database.url=https://your-project-id.firebaseio.com
+firebase.storage.bucket=your-project-id.appspot.com
