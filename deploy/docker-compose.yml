@@ -1,0 +1,69 @@
+version: "3.9"
+
+services:
+  session:
+    build:
+      context: .
+      dockerfile: services/session/Dockerfile
+    environment:
+      - SESSION_SEED_B64=REPLACE_WITH_BASE64_SEED
+      - SESSION_ISSUER_KEY_ID=session-key-1
+    ports:
+      - "8081:8080"
+
+  template-repo:
+    build:
+      context: .
+      dockerfile: services/template-repo/Dockerfile
+    environment:
+      - TEMPLATE_SECRET_KEY_HEX=00112233445566778899aabbccddeeff
+    ports:
+      - "8082:8080"
+
+  ledger:
+    build:
+      context: .
+      dockerfile: services/ledger/Dockerfile
+    ports:
+      - "8083:8080"
+
+  decision:
+    build:
+      context: .
+      dockerfile: services/decision/Dockerfile
+    environment:
+      - LEDGER_SERVICE_URL=http://ledger:8080
+      - SESSION_PUBLIC_KEY_B64=REPLACE_WITH_SESSION_PUBKEY_B64
+      - DECISION_SEED_B64=REPLACE_WITH_BASE64_SEED
+    ports:
+      - "8084:8080"
+
+  verification:
+    build:
+      context: .
+      dockerfile: services/verification/Dockerfile
+    environment:
+      - TEMPLATE_SERVICE_URL=http://template-repo:8080
+      - DECISION_SERVICE_URL=http://decision:8080
+      - VERIFICATION_SEED_B64=REPLACE_WITH_BASE64_SEED
+    ports:
+      - "8085:8080"
+
+  capture:
+    build:
+      context: .
+      dockerfile: services/capture/Dockerfile
+    environment:
+      - VERIFICATION_SERVICE_URL=http://verification:8080
+      - SESSION_PUBLIC_KEY_B64=REPLACE_WITH_SESSION_PUBKEY_B64
+    ports:
+      - "8086:8080"
+
+  audit:
+    build:
+      context: .
+      dockerfile: services/audit/Dockerfile
+    environment:
+      - LEDGER_SERVICE_URL=http://ledger:8080
+    ports:
+      - "8087:8080"
